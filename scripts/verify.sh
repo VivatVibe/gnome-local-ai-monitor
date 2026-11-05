@@ -22,9 +22,10 @@ echo ""
 echo ">> Step 3/5: Verifying PR 3 GPU VRAM Telemetry..."
 gjs -m "${ROOT_DIR}/tests/test_gpu_telemetry.js"
 
-# 4. PR 4 UI Assembly
+# 4. PR 4 UI Assembly & Preferences
 echo ""
-echo ">> Step 4/5: Verifying PR 4 UI Assembly & Packaging..."
+echo ">> Step 4/5: Verifying PR 4 UI Assembly, Preferences & Packaging..."
+gjs -m "${ROOT_DIR}/tests/test_preferences.js"
 bash "${ROOT_DIR}/tests/test_ui_assembly.sh"
 
 # 5. PR 5 Package Build & Inspection

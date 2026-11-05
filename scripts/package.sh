@@ -22,6 +22,7 @@ gnome-extensions pack \
   --extra-source=lib \
   --extra-source=ui \
   --extra-source=resources \
+  --extra-source=preferences.js \
   --out-dir="${BUILD_DIR}" \
   "${EXT_DIR}"
 

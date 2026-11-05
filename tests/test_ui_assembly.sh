@@ -10,17 +10,17 @@ trap 'rm -rf "${TMP_DIR}"' EXIT
 
 # 1. Check required files
 echo "[1/5] Verifying UI source files..."
-for f in extension.js ui/indicator.js ui/animation.js ui/menu.js lib/types.js lib/ollamaClient.js lib/gpuTelemetry.js resources/icons/alpaca/running-0-symbolic.svg; do
+for f in extension.js prefs.js preferences.js ui/indicator.js ui/animation.js ui/menu.js lib/types.js lib/ollamaClient.js lib/gpuTelemetry.js resources/icons/alpaca/running-0-symbolic.svg; do
   [ -s "${EXT_DIR}/${f}" ] || { echo "Error: ${f} is missing or empty"; exit 1; }
 done
-echo "  All UI, animation, and logic files exist."
+echo "  All UI, animation, logic, and preference files exist."
 
 # 2. Syntax validation
 echo "[2/5] Checking ESM syntax of UI files..."
 python3 -c "
 import re
 
-files = ['${EXT_DIR}/extension.js', '${EXT_DIR}/ui/indicator.js', '${EXT_DIR}/ui/animation.js', '${EXT_DIR}/ui/menu.js']
+files = ['${EXT_DIR}/extension.js', '${EXT_DIR}/prefs.js', '${EXT_DIR}/preferences.js', '${EXT_DIR}/ui/indicator.js', '${EXT_DIR}/ui/animation.js', '${EXT_DIR}/ui/menu.js']
 for path in files:
     with open(path) as f:
         content = f.read()
@@ -31,7 +31,7 @@ print('  ESM syntax verified across UI components.')
 
 # 3. Test GNOME Extension Packaging
 echo "[3/5] Testing extension bundle packaging with extra sources..."
-gnome-extensions pack --force --extra-source=lib --extra-source=ui --extra-source=resources --out-dir="${TMP_DIR}" "${EXT_DIR}"
+gnome-extensions pack --force --extra-source=lib --extra-source=ui --extra-source=resources --extra-source=preferences.js --out-dir="${TMP_DIR}" "${EXT_DIR}"
 ZIP_PATH="${TMP_DIR}/local-ai-monitor@local-ai.mrnv.shell-extension.zip"
 [ -f "${ZIP_PATH}" ] || { echo "Error: extension zip not created"; exit 1; }
 echo "  Shell extension zip generated successfully."
@@ -46,6 +46,8 @@ with zipfile.ZipFile('${ZIP_PATH}', 'r') as z:
         'metadata.json',
         'stylesheet.css',
         'extension.js',
+        'prefs.js',
+        'preferences.js',
         'ui/indicator.js',
         'ui/animation.js',
         'ui/menu.js',
@@ -68,7 +70,7 @@ echo "[5/5] Measuring packaging duration and archive size..."
 python3 -c "
 import os, subprocess, time
 t0 = time.perf_counter()
-subprocess.run(['gnome-extensions', 'pack', '--force', '--extra-source=lib', '--extra-source=ui', '--extra-source=resources', '--out-dir=${TMP_DIR}', '${EXT_DIR}'], check=True)
+subprocess.run(['gnome-extensions', 'pack', '--force', '--extra-source=lib', '--extra-source=ui', '--extra-source=resources', '--extra-source=preferences.js', '--out-dir=${TMP_DIR}', '${EXT_DIR}'], check=True)
 dur_ms = (time.perf_counter() - t0) * 1000.0
 size_kb = os.path.getsize('${ZIP_PATH}') / 1024.0
 print(f'  Pack duration: {dur_ms:.1f} ms (budget: 200 ms)')
