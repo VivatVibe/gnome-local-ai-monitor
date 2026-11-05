@@ -18,31 +18,45 @@ export class AnimationController {
 
   _loadIcons() {
     try {
-      const dir = `${this._basePath}/resources/icons/alpaca`;
+      const gpuDir = `${this._basePath}/resources/icons/gpu`;
+      const alpacaDir = `${this._basePath}/resources/icons/alpaca`;
 
-      const sleepingPath = `${dir}/sleeping-symbolic.svg`;
-      const idlePath = `${dir}/idle-symbolic.svg`;
-      const targetSleeping = Gio.File.new_for_path(sleepingPath).query_exists(null)
-        ? sleepingPath
-        : idlePath;
+      const hasGpuIcons = Gio.File.new_for_path(`${gpuDir}/idle.svg`).query_exists(null);
 
-      if (Gio.File.new_for_path(targetSleeping).query_exists(null)) {
-        this._sleepingFrame = Gio.icon_new_for_string(targetSleeping);
-      }
+      if (hasGpuIcons) {
+        this._sleepingFrame = Gio.icon_new_for_string(`${gpuDir}/idle.svg`);
+        this._offlineFrame = Gio.icon_new_for_string(`${gpuDir}/offline.svg`);
+        for (let i = 0; i < 4; i++) {
+          const framePath = `${gpuDir}/fan-${i}.svg`;
+          if (Gio.File.new_for_path(framePath).query_exists(null)) {
+            this._runningFrames.push(Gio.icon_new_for_string(framePath));
+          }
+        }
+      } else {
+        const sleepingPath = `${alpacaDir}/sleeping-symbolic.svg`;
+        const idlePath = `${alpacaDir}/idle-symbolic.svg`;
+        const targetSleeping = Gio.File.new_for_path(sleepingPath).query_exists(null)
+          ? sleepingPath
+          : idlePath;
 
-      const offlinePath = `${dir}/offline-symbolic.svg`;
-      if (Gio.File.new_for_path(offlinePath).query_exists(null)) {
-        this._offlineFrame = Gio.icon_new_for_string(offlinePath);
-      }
+        if (Gio.File.new_for_path(targetSleeping).query_exists(null)) {
+          this._sleepingFrame = Gio.icon_new_for_string(targetSleeping);
+        }
 
-      for (let i = 0; i < 4; i++) {
-        const framePath = `${dir}/running-${i}-symbolic.svg`;
-        if (Gio.File.new_for_path(framePath).query_exists(null)) {
-          this._runningFrames.push(Gio.icon_new_for_string(framePath));
+        const offlinePath = `${alpacaDir}/offline-symbolic.svg`;
+        if (Gio.File.new_for_path(offlinePath).query_exists(null)) {
+          this._offlineFrame = Gio.icon_new_for_string(offlinePath);
+        }
+
+        for (let i = 0; i < 4; i++) {
+          const framePath = `${alpacaDir}/running-${i}-symbolic.svg`;
+          if (Gio.File.new_for_path(framePath).query_exists(null)) {
+            this._runningFrames.push(Gio.icon_new_for_string(framePath));
+          }
         }
       }
     } catch (e) {
-      logError(e, 'Failed to load Ollama Alpaca animation frames');
+      logError(e, 'Failed to load animation frames');
     }
   }
 
@@ -97,7 +111,7 @@ export class AnimationController {
       return;
     }
 
-    // 2. Offline state: sleeping alpaca
+    // 2. Offline state: offline card
     if (!ollamaState || ollamaState.status !== ServerStatus.ONLINE) {
       this._stopTicker();
       if (this._offlineFrame) {
@@ -108,7 +122,7 @@ export class AnimationController {
       return;
     }
 
-    // 3. 0% Load / Idle state: Alpaca sleeps peacefully
+    // 3. 0% Load / Idle state: Zero-RPM mode (fans stationary)
     const gpuLoad = (gpuState && gpuState.hasGpu) ? (gpuState.utilizationPercent || 0) : 0;
 
     if (gpuLoad === 0) {
@@ -119,10 +133,10 @@ export class AnimationController {
       return;
     }
 
-    // 4. Active load state (load > 0%): Alpaca wakes up and runs
+    // 4. Active load state (load > 0%): Dual fans spin dynamically
     const clampedLoad = Math.min(100, Math.max(1, gpuLoad));
-    // Dynamic interval: from 220 ms (gentle trot at 1% load) down to 60 ms (sprint at 100% load)
-    const intervalMs = Math.max(60, Math.round(220 - (clampedLoad * 1.6)));
+    // Dynamic interval: 1% load = 200 ms, 100% load = 50 ms fast turbo spin
+    const intervalMs = Math.max(50, Math.round(200 - (clampedLoad * 1.5)));
 
     this._startTicker(intervalMs);
   }

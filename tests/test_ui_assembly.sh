@@ -54,7 +54,9 @@ with zipfile.ZipFile('${ZIP_PATH}', 'r') as z:
         'lib/gpuTelemetry.js',
         'resources/icons/alpaca/running-0-symbolic.svg',
         'resources/icons/alpaca/idle-symbolic.svg',
-        'resources/icons/alpaca/offline-symbolic.svg'
+        'resources/icons/alpaca/offline-symbolic.svg',
+        'resources/icons/gpu/fan-0.svg',
+        'resources/icons/gpu/idle.svg'
     ]
     for exp in expected:
         assert any(exp in n for n in names), f'Missing {exp} in zip'
