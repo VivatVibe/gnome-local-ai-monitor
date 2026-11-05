@@ -17,7 +17,8 @@ export const LocalAiIndicator = GObject.registerClass(
 
       this._icon = new St.Icon({
         icon_name: 'utilities-terminal-symbolic',
-        style_class: 'system-status-icon',
+        icon_size: 24,
+        style_class: 'local-ai-icon',
       });
       this._box.add_child(this._icon);
 

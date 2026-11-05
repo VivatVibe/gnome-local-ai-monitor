@@ -8,6 +8,11 @@
   spacing: 6px;
 }
 
+.local-ai-icon {
+  icon-size: 24px;
+  color: #ffffff;
+}
+
 .local-ai-badge {
   font-weight: bold;
   font-size: 0.85em;

@@ -2,7 +2,7 @@ import os
 
 def create_svg(title, inner_content):
     return f'''<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32" class="symbolic">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32" class="symbolic">
   <title>{title}</title>
   {inner_content}
 </svg>
@@ -16,7 +16,7 @@ def create_svg(title, inner_content):
 # =========================================================================
 sleeping_svg = '''
   <!-- Cute Sleeping Alpaca Body & Tilted Head -->
-  <g style="fill: currentColor; stroke: none;">
+  <g style="fill: #ffffff; stroke: none;">
     <!-- Fluffy chubby body resting on desk/ground -->
     <path d="M 6,24 C 6,20 10,18 16,18 C 22,18 26,20 26,24 C 26,27 22,28 16,28 C 10,28 6,27 6,24 Z" />
     <!-- Little folded cute front paws -->
@@ -31,7 +31,7 @@ sleeping_svg = '''
     <path d="M 17.5,9 C 16.5,9 16,6.5 17,5 C 18,3.5 19.5,4 19.5,6 L 19,9 Z" />
   </g>
   <!-- Cutout facial features (closed sleeping eyes ⌒ ⌒ and cute nose) using negative background or lines -->
-  <g style="stroke: #2e3436; stroke-width: 1.2; stroke-linecap: round; fill: none;">
+  <g style="stroke: #101014; stroke-width: 1.2; stroke-linecap: round; fill: none;">
     <!-- Left closed sleeping eye ⌒ -->
     <path d="M 13,13.5 Q 14.5,12 16,13.5" />
     <!-- Right closed sleeping eye ⌒ -->
@@ -40,7 +40,7 @@ sleeping_svg = '''
     <path d="M 16.5,17 Q 17.5,18 18.5,17" />
   </g>
   <!-- Floating sleep bubbles 'z' and 'Z' -->
-  <g style="fill: currentColor;">
+  <g style="fill: #ffffff;">
     <!-- Small z -->
     <path d="M 22,9 H 24.5 L 22.8,11.5 H 25 V 12.2 H 22 L 23.8,9.7 H 22 Z" />
     <!-- Big Z -->
@@ -54,7 +54,7 @@ sleeping_svg = '''
 
 # Frame 0: Stride A (Chubby body, front right leg forward, back left leg back, ears bouncy)
 run0_svg = '''
-  <g style="fill: currentColor; stroke: none;">
+  <g style="fill: #ffffff; stroke: none;">
     <!-- Chubby body -->
     <ellipse cx="14" cy="20" rx="7.5" ry="5.5" />
     <!-- Tail -->
@@ -76,13 +76,13 @@ run0_svg = '''
     <path d="M 11,23 Q 11.5,26 12,28 Q 11,28.5 10,28 Q 9.5,26 9.5,23 Z" />
   </g>
   <!-- Cute eye dot cutout -->
-  <circle cx="22.5" cy="10.5" r="1.1" style="fill: #2e3436;" />
-  <circle cx="25" cy="12.5" r="0.6" style="fill: #2e3436;" />
+  <circle cx="22.5" cy="10.5" r="1.1" style="fill: #101014;" />
+  <circle cx="25" cy="12.5" r="0.6" style="fill: #101014;" />
 '''
 
 # Frame 1: Gather (Body slightly lower, legs tucked under chubby tummy)
 run1_svg = '''
-  <g style="fill: currentColor; stroke: none;">
+  <g style="fill: #ffffff; stroke: none;">
     <!-- Chubby body -->
     <ellipse cx="14" cy="21" rx="7.5" ry="5.5" />
     <!-- Tail -->
@@ -101,13 +101,13 @@ run1_svg = '''
     <path d="M 10,24 Q 12,26 13,28 Q 12,28.5 11,27.5 Q 9.5,26 9,24 Z" />
     <path d="M 8.5,24 Q 10,26 11,27.5 Q 10,28 9,27 Q 8,25.5 7.5,24 Z" />
   </g>
-  <circle cx="22.5" cy="11.5" r="1.1" style="fill: #2e3436;" />
-  <circle cx="25" cy="13.5" r="0.6" style="fill: #2e3436;" />
+  <circle cx="22.5" cy="11.5" r="1.1" style="fill: #101014;" />
+  <circle cx="25" cy="13.5" r="0.6" style="fill: #101014;" />
 '''
 
 # Frame 2: Stride B (Opposite front leg reaching forward, opposite back leg reaching back)
 run2_svg = '''
-  <g style="fill: currentColor; stroke: none;">
+  <g style="fill: #ffffff; stroke: none;">
     <!-- Chubby body -->
     <ellipse cx="14" cy="20" rx="7.5" ry="5.5" />
     <!-- Tail -->
@@ -128,13 +128,13 @@ run2_svg = '''
     <!-- Back stubby leg 1 pushing down -->
     <path d="M 11,23 Q 11.5,25.5 12.5,27.5 Q 11.5,28 10.5,27.5 Q 10,25.5 10,23 Z" />
   </g>
-  <circle cx="22.5" cy="10.5" r="1.1" style="fill: #2e3436;" />
-  <circle cx="25" cy="12.5" r="0.6" style="fill: #2e3436;" />
+  <circle cx="22.5" cy="10.5" r="1.1" style="fill: #101014;" />
+  <circle cx="25" cy="12.5" r="0.6" style="fill: #101014;" />
 '''
 
 # Frame 3: Airborne Leap (Chubby alpaca in mid-air hop! High cuteness!)
 run3_svg = '''
-  <g style="fill: currentColor; stroke: none;">
+  <g style="fill: #ffffff; stroke: none;">
     <!-- Chubby body raised up -->
     <ellipse cx="14" cy="18" rx="7.5" ry="5.5" />
     <!-- Tail high -->
@@ -153,8 +153,8 @@ run3_svg = '''
     <path d="M 9,21 Q 5,21.5 2.5,23.5 Q 3,24.5 4.5,24.2 Q 7.5,22.8 10,22 Z" />
     <path d="M 10.5,21 Q 7,22.5 5,24.5 Q 5.5,25.5 7,25 Q 9.5,23.5 11.5,22 Z" />
   </g>
-  <circle cx="22.5" cy="8.5" r="1.1" style="fill: #2e3436;" />
-  <circle cx="25" cy="10.5" r="0.6" style="fill: #2e3436;" />
+  <circle cx="22.5" cy="8.5" r="1.1" style="fill: #101014;" />
+  <circle cx="25" cy="10.5" r="0.6" style="fill: #101014;" />
 '''
 
 # Idle frame (standing cute, but when load is 0% it will sleep per user request)

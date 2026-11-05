@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32" class="symbolic">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32" class="symbolic">
   <title>Ollama Alpaca: Sleeping</title>
   
   <!-- Cute Sleeping Alpaca Body & Tilted Head -->
-  <g style="fill: currentColor; stroke: none;">
+  <g style="fill: #ffffff; stroke: none;">
     <!-- Fluffy chubby body resting on desk/ground -->
     <path d="M 6,24 C 6,20 10,18 16,18 C 22,18 26,20 26,24 C 26,27 22,28 16,28 C 10,28 6,27 6,24 Z" />
     <!-- Little folded cute front paws -->
@@ -18,7 +18,7 @@
     <path d="M 17.5,9 C 16.5,9 16,6.5 17,5 C 18,3.5 19.5,4 19.5,6 L 19,9 Z" />
   </g>
   <!-- Cutout facial features (closed sleeping eyes ⌒ ⌒ and cute nose) using negative background or lines -->
-  <g style="stroke: #2e3436; stroke-width: 1.2; stroke-linecap: round; fill: none;">
+  <g style="stroke: #101014; stroke-width: 1.2; stroke-linecap: round; fill: none;">
     <!-- Left closed sleeping eye ⌒ -->
     <path d="M 13,13.5 Q 14.5,12 16,13.5" />
     <!-- Right closed sleeping eye ⌒ -->
@@ -27,7 +27,7 @@
     <path d="M 16.5,17 Q 17.5,18 18.5,17" />
   </g>
   <!-- Floating sleep bubbles 'z' and 'Z' -->
-  <g style="fill: currentColor;">
+  <g style="fill: #ffffff;">
     <!-- Small z -->
     <path d="M 22,9 H 24.5 L 22.8,11.5 H 25 V 12.2 H 22 L 23.8,9.7 H 22 Z" />
     <!-- Big Z -->
