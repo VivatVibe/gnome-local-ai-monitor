@@ -5,14 +5,14 @@ Monitors your local Ollama instance and GPU VRAM usage directly from the top pan
 
 ## Features
 
-- **Cute Animated Ollama Alpaca (RunCat-style):** Mascot dynamically gallops based on GPU compute load and sleeps peacefully with `z Z` bubbles at 0% load.
+- **Hardware-Minimalist Dual-Fan GPU Card (RunCat-style):** Graphics card with dual spinning cooling fans that scale rotational speed dynamically based on GPU compute load, with Zero-RPM idle mode at 0% load.
 - **Installed Models Submenu:** One-click preloading to warm any installed model into VRAM directly from the panel.
 - **Real-time Ollama Status:** Shows server connectivity status (ONLINE/OFFLINE) and version.
 - **Active Model Detection:** Displays the model currently resident in GPU memory.
 - **VRAM & Compute Telemetry:** Tracks memory consumption (MiB / GiB) and utilization percentage on NVIDIA GPUs.
 - **One-Click Unload:** Easily unload the active model from VRAM from the dropdown menu to free GPU memory.
 - **Non-blocking Architecture:** Built with modern GJS ESM using asynchronous Soup 3.0 and Gio.Subprocess calls.
-- **Customizable Preferences:** Configure the API endpoint, polling interval, and top-panel display options via Libadwaita preferences.
+- **Customizable Preferences:** Configure the API endpoint, refresh rate presets (1s, 2s, 5s), and top-panel display options via modern Libadwaita preferences.
 
 ## Supported GNOME Versions
 
@@ -53,9 +53,10 @@ gnome-extensions prefs local-ai-monitor@local-ai.mrnv
 
 Options include:
 - **Ollama API Endpoint:** Customize the host URL (default: `http://127.0.0.1:11434`).
-- **Refresh Interval:** Adjust polling frequency between 1 and 60 seconds (default: 3s).
+- **Refresh Rate Presets:** Select from 1s (Fast), 2s (Normal), or 5s (Relaxed) polling intervals.
 - **Display Active Model Name:** Toggle model name visibility on the top bar.
 - **Display GPU VRAM Percentage:** Toggle VRAM percentage on the top bar.
+- **Animate GPU Card Fans:** Toggle spinning fan animation.
 
 ## Verification & Testing
 
