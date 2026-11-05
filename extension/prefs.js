@@ -79,6 +79,18 @@ export default class LocalAiMonitorPreferences extends ExtensionPreferences {
     );
     displayGroup.add(vramRow);
 
+    const animRow = new Adw.SwitchRow({
+      title: _('Animate Running Alpaca'),
+      subtitle: _('Animate the Ollama mascot running dynamically based on GPU load.'),
+    });
+    settings.bind(
+      'enable-running-animation',
+      animRow,
+      'active',
+      Gio.SettingsBindFlags.DEFAULT
+    );
+    displayGroup.add(animRow);
+
     window.add(page);
   }
 }

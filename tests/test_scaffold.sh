@@ -40,6 +40,7 @@ assert keys.get('poll-interval') == '3', 'poll-interval default must be 3'
 assert keys.get('ollama-endpoint') == \"'http://127.0.0.1:11434'\", 'ollama-endpoint default mismatch'
 assert keys.get('show-gpu-vram') == 'true', 'show-gpu-vram default mismatch'
 assert keys.get('show-model-name') == 'true', 'show-model-name default mismatch'
+assert keys.get('enable-running-animation') == 'true', 'enable-running-animation default mismatch'
 print('  Schema keys and default values verified.')
 "
 

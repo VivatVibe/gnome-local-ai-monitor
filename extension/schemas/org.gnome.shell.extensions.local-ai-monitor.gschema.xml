@@ -22,5 +22,10 @@
       <summary>Show Active Model Name</summary>
       <description>Whether to display the currently loaded model name in the top panel.</description>
     </key>
+    <key name="enable-running-animation" type="b">
+      <default>true</default>
+      <summary>Enable Running Alpaca Animation</summary>
+      <description>Whether to animate the Ollama alpaca mascot icon based on activity and GPU load.</description>
+    </key>
   </schema>
 </schemalist>

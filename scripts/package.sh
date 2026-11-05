@@ -21,6 +21,7 @@ gnome-extensions pack \
   --force \
   --extra-source=lib \
   --extra-source=ui \
+  --extra-source=resources \
   --out-dir="${BUILD_DIR}" \
   "${EXT_DIR}"
 

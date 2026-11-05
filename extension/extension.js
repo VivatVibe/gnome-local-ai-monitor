@@ -15,7 +15,7 @@ export default class LocalAiMonitorExtension extends Extension {
     this._ollamaClient = new OllamaClient(endpoint);
     this._gpuTelemetry = new GpuTelemetry();
 
-    this._indicator = new LocalAiIndicator();
+    this._indicator = new LocalAiIndicator(this.path);
     this._menu = new LocalAiMenu(
       this._indicator.menu,
       this._ollamaClient,
@@ -52,7 +52,7 @@ export default class LocalAiMonitorExtension extends Extension {
         const newEndpoint = settings.get_string('ollama-endpoint');
         this._ollamaClient.setEndpoint(newEndpoint);
         this._ollamaClient.poll();
-      } else if (key === 'show-model-name' || key === 'show-gpu-vram') {
+      } else if (key === 'show-model-name' || key === 'show-gpu-vram' || key === 'enable-running-animation') {
         this._updateHandler();
       }
     });
