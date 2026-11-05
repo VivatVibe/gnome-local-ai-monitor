@@ -134,6 +134,20 @@ export class OllamaClient {
     return this.state;
   }
 
+  async loadModel(modelName) {
+    if (!modelName) return false;
+    try {
+      await this._request('POST', '/api/generate', {
+        model: modelName,
+      });
+      await this.poll();
+      return true;
+    } catch (e) {
+      logError(e, `Failed to load model ${modelName}`);
+      return false;
+    }
+  }
+
   async unloadModel(modelName) {
     if (!modelName) return false;
     try {

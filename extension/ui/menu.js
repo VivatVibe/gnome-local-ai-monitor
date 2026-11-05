@@ -9,6 +9,7 @@ export class LocalAiMenu {
     this._ollamaClient = ollamaClient;
     this._gpuTelemetry = gpuTelemetry;
     this._onOpenPrefs = onOpenPrefs;
+    this._lastModelsSig = null;
 
     this._buildStaticSections();
   }
@@ -47,9 +48,13 @@ export class LocalAiMenu {
     });
     this._menu.addMenuItem(this._unloadItem);
 
+    // 3. Installed Models SubMenu
+    this._installedSubMenu = new PopupMenu.PopupSubMenuMenuItem('📦 Installed Models');
+    this._menu.addMenuItem(this._installedSubMenu);
+
     this._menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-    // 3. GPU Telemetry Section
+    // 4. GPU Telemetry Section
     this._gpuSectionHeader = new PopupMenu.PopupMenuItem('GPU TELEMETRY', {
       reactive: false,
       style_class: 'local-ai-menu-header',
@@ -68,7 +73,7 @@ export class LocalAiMenu {
 
     this._menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-    // 4. Preferences item
+    // 5. Preferences item
     if (this._onOpenPrefs) {
       const prefsItem = new PopupMenu.PopupMenuItem('⚙ Extension Settings');
       prefsItem.connect('activate', () => {
@@ -100,7 +105,49 @@ export class LocalAiMenu {
       this._unloadItem.setSensitive(false);
     }
 
-    // 3. Update GPU Telemetry
+    // 3. Update Installed Models SubMenu
+    if (ollamaState.status !== ServerStatus.ONLINE) {
+      if (this._lastModelsSig !== 'offline') {
+        this._lastModelsSig = 'offline';
+        this._installedSubMenu.menu.removeAll();
+        const offItem = new PopupMenu.PopupMenuItem('Server offline', { reactive: false });
+        this._installedSubMenu.menu.addMenuItem(offItem);
+        this._installedSubMenu.setSensitive(false);
+      }
+    } else {
+      const available = ollamaState.availableModels || [];
+      const loadedNames = new Set(loaded.map((m) => m.name));
+      const sig = `${available.map((m) => m.name).join(',')}:${[...loadedNames].join(',')}`;
+
+      if (this._lastModelsSig !== sig) {
+        this._lastModelsSig = sig;
+        this._installedSubMenu.menu.removeAll();
+
+        if (available.length === 0) {
+          const emptyItem = new PopupMenu.PopupMenuItem('No models installed', { reactive: false });
+          this._installedSubMenu.menu.addMenuItem(emptyItem);
+        } else {
+          for (const m of available) {
+            const isLoaded = loadedNames.has(m.name);
+            const label = isLoaded
+              ? `● ${m.name} (Active)`
+              : `○ ${m.name} (${formatBytes(m.size)})`;
+            const modelItem = new PopupMenu.PopupMenuItem(label, {
+              reactive: !isLoaded,
+            });
+            if (!isLoaded) {
+              modelItem.connect('activate', () => {
+                this._ollamaClient.loadModel(m.name);
+              });
+            }
+            this._installedSubMenu.menu.addMenuItem(modelItem);
+          }
+        }
+        this._installedSubMenu.setSensitive(true);
+      }
+    }
+
+    // 4. Update GPU Telemetry
     if (gpuState && gpuState.hasGpu) {
       this._gpuNameItem.label.set_text(`GPU: ${gpuState.name}`);
       this._vramItem.label.set_text(
@@ -116,6 +163,7 @@ export class LocalAiMenu {
     this._serverItem = null;
     this._activeModelItem = null;
     this._unloadItem = null;
+    this._installedSubMenu = null;
     this._gpuNameItem = null;
     this._vramItem = null;
     this._menu = null;
