@@ -5,6 +5,8 @@ Monitors your local Ollama instance and GPU VRAM usage directly from the top pan
 
 ## Features
 
+- **Cute Animated Ollama Alpaca (RunCat-style):** Mascot dynamically gallops based on GPU compute load and sleeps peacefully with `z Z` bubbles at 0% load.
+- **Installed Models Submenu:** One-click preloading to warm any installed model into VRAM directly from the panel.
 - **Real-time Ollama Status:** Shows server connectivity status (ONLINE/OFFLINE) and version.
 - **Active Model Detection:** Displays the model currently resident in GPU memory.
 - **VRAM & Compute Telemetry:** Tracks memory consumption (MiB / GiB) and utilization percentage on NVIDIA GPUs.
