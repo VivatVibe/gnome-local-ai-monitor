@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="gnome-shell-extension-local-ai-monitor">
+  <schema id="org.gnome.shell.extensions.local-ai-monitor" path="/org/gnome/shell/extensions/local-ai-monitor/">
+    <key name="poll-interval" type="i">
+      <default>3</default>
+      <range min="1" max="60"/>
+      <summary>Polling interval</summary>
+      <description>Interval in seconds between telemetry and API refresh ticks.</description>
+    </key>
+    <key name="ollama-endpoint" type="s">
+      <default>'http://127.0.0.1:11434'</default>
+      <summary>Ollama API Host Endpoint</summary>
+      <description>URL endpoint for the local Ollama daemon service.</description>
+    </key>
+    <key name="show-gpu-vram" type="b">
+      <default>true</default>
+      <summary>Show GPU VRAM</summary>
+      <description>Whether to query and display GPU VRAM utilization metrics.</description>
+    </key>
+    <key name="show-model-name" type="b">
+      <default>true</default>
+      <summary>Show Active Model Name</summary>
+      <description>Whether to display the currently loaded model name in the top panel.</description>
+    </key>
+  </schema>
+</schemalist>

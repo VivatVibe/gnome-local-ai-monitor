@@ -1,0 +1,52 @@
+/* Local AI Monitor Stylesheet */
+
+.local-ai-panel-button {
+  spacing: 4px;
+}
+
+.local-ai-panel-box {
+  spacing: 6px;
+}
+
+.local-ai-badge {
+  font-weight: bold;
+  font-size: 0.85em;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.local-ai-status-online {
+  color: #33d17a;
+  font-weight: bold;
+}
+
+.local-ai-status-offline {
+  color: #e01b24;
+  font-weight: bold;
+}
+
+.local-ai-menu-header {
+  font-weight: bold;
+  font-size: 0.9em;
+  padding: 6px 12px;
+  color: #9a9996;
+}
+
+.local-ai-model-card {
+  padding: 4px 12px;
+  spacing: 8px;
+}
+
+.local-ai-vram-container {
+  height: 6px;
+  border-radius: 3px;
+  background-color: rgba(255, 255, 255, 0.15);
+  margin: 4px 12px;
+}
+
+.local-ai-vram-fill {
+  height: 6px;
+  border-radius: 3px;
+  background-color: #3584e4;
+}

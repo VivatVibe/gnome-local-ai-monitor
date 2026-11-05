@@ -1,0 +1,17 @@
+{
+  "name": "Local AI Monitor",
+  "description": "Monitor Local AI (Ollama) service status, active loaded models, and NVIDIA GPU VRAM metrics from the GNOME top panel.",
+  "uuid": "local-ai-monitor@local-ai.mrnv",
+  "shell-version": [
+    "45",
+    "46",
+    "47",
+    "48",
+    "49",
+    "50",
+    "51"
+  ],
+  "url": "https://github.com/mrnv/gnome-local-ai-monitor",
+  "settings-schema": "org.gnome.shell.extensions.local-ai-monitor",
+  "version": 1
+}

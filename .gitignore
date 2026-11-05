@@ -1,0 +1,21 @@
+# Build artifacts
+build/
+*.shell-extension.zip
+schemas/gschemas.compiled
+extension/schemas/gschemas.compiled
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.vscode/
+.idea/
+
+# Node / JS
+node_modules/
+npm-debug.log*
+
+# Python cache
+__pycache__/
+*.py[cod]
