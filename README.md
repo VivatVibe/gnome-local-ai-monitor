@@ -62,5 +62,5 @@ Options include:
 Run the full end-to-end verification suite:
 
 ```bash
-bash scripts/verify_local_ai.sh
+bash scripts/verify.sh
 ```
