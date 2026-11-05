@@ -1,37 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32" class="symbolic">
-  <title>Ollama Alpaca: Sleeping (0% Load)</title>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32">
+  <title>Ollama Alpaca: Idle / 0% Load (Cartoon Line-Art)</title>
+  <defs>
+    <style>
+      .outline { stroke: #1e1e24; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+      .fill-white { fill: #ffffff; }
+      .detail-stroke { stroke: #1e1e24; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .face-feature { fill: #1e1e24; stroke: none; }
+    </style>
+  </defs>
   
-  <!-- Cute Sleeping Alpaca Body & Tilted Head -->
-  <g style="fill: #ffffff; stroke: none;">
-    <!-- Fluffy chubby body resting on desk/ground -->
-    <path d="M 6,24 C 6,20 10,18 16,18 C 22,18 26,20 26,24 C 26,27 22,28 16,28 C 10,28 6,27 6,24 Z" />
-    <!-- Little folded cute front paws -->
-    <ellipse cx="13" cy="27" rx="2.5" ry="1.5" />
-    <ellipse cx="19" cy="27" rx="2.5" ry="1.5" />
-    <!-- Fluffy little tail -->
-    <circle cx="5.5" cy="23" r="2" />
-    <!-- Tilted cute chubby head -->
-    <circle cx="16" cy="14" r="6" />
-    <!-- Cute upright ears tilted slightly to the right -->
-    <path d="M 12.5,9 C 11.5,9 11,6.5 12,5 C 13,3.5 14.5,4 14.5,6 L 14,9 Z" />
-    <path d="M 17.5,9 C 16.5,9 16,6.5 17,5 C 18,3.5 19.5,4 19.5,6 L 19,9 Z" />
+  <g class="outline fill-white">
+    <!-- Fluffy Body resting -->
+    <path d="M 6,24 C 6,19 10,17 16,17 C 22,17 26,19 26,24 C 26,27.5 22,28.5 16,28.5 C 10,28.5 6,27.5 6,24 Z" />
+    
+    <!-- Folded Paws -->
+    <ellipse cx="12" cy="27.5" rx="2.5" ry="1.5" />
+    <ellipse cx="19" cy="27.5" rx="2.5" ry="1.5" />
+    
+    <!-- Puffy Tail -->
+    <circle cx="5.5" cy="22.5" r="2.2" />
+
+    <!-- Upright Ears (tilted) -->
+    <path d="M 12.5,9.5 C 11.5,9.5 11,6 12,4 C 13,2.5 14.8,3.2 14.5,5.5 L 14,9.5 Z" />
+    <path d="M 17.5,9.5 C 16.5,9.5 16,6 17,4 C 18,2.5 19.8,3.2 19.5,5.5 L 19,9.5 Z" />
+
+    <!-- Chubby Head -->
+    <circle cx="16" cy="14.5" r="6.2" />
+    
+    <!-- Muzzle oval -->
+    <ellipse cx="16" cy="16.5" rx="3.2" ry="2.2" />
   </g>
-  <!-- Cutout facial features (closed sleeping eyes ⌒ ⌒ and cute nose) using negative background or lines -->
-  <g style="stroke: #101014; stroke-width: 1.2; stroke-linecap: round; fill: none;">
-    <!-- Left closed sleeping eye ⌒ -->
-    <path d="M 13,13.5 Q 14.5,12 16,13.5" />
-    <!-- Right closed sleeping eye ⌒ -->
-    <path d="M 17.5,14 Q 19,12.5 20.5,14" />
-    <!-- Little cute smile/mouth -->
-    <path d="M 16.5,17 Q 17.5,18 18.5,17" />
+
+  <!-- Inner Ear lines -->
+  <path d="M 13,5.5 L 13.2,7.5" class="detail-stroke" />
+  <path d="M 18,5.5 L 18.2,7.5" class="detail-stroke" />
+
+  <!-- Sleeping Eyes (⌒ ⌒) and inverted Y mouth -->
+  <g class="detail-stroke">
+    <!-- Left sleeping eye -->
+    <path d="M 12.8,13.8 Q 14.2,12.2 15.6,13.8" />
+    <!-- Right sleeping eye -->
+    <path d="M 16.4,13.8 Q 17.8,12.2 19.2,13.8" />
+    <!-- Inverted Y nose/mouth -->
+    <path d="M 16,16 L 16,17.2 M 16,17.2 L 15.2,18 M 16,17.2 L 16.8,18" />
   </g>
-  <!-- Floating sleep bubbles 'z' and 'Z' -->
-  <g style="fill: #ffffff;">
+  <!-- Tiny nose dot -->
+  <circle cx="16" cy="15.8" r="0.6" class="face-feature" />
+
+  <!-- Cartoon Sleep Bubbles (z Z) -->
+  <g class="outline fill-white">
     <!-- Small z -->
-    <path d="M 22,9 H 24.5 L 22.8,11.5 H 25 V 12.2 H 22 L 23.8,9.7 H 22 Z" />
+    <path d="M 22.5,8 H 25.5 L 23.2,11 H 26 V 12 H 22.2 L 24.5,9 H 22.5 Z" />
     <!-- Big Z -->
-    <path d="M 24.5,3.5 H 28 L 25.5,6.8 H 28.5 V 7.8 H 24.5 L 27,4.5 H 24.5 Z" />
+    <path d="M 24.5,2 H 28.5 L 25.8,5.5 H 29 V 6.5 H 24.5 L 27.2,3 H 24.5 Z" />
   </g>
 
 </svg>
