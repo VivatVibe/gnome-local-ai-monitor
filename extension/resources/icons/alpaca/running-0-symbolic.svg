@@ -2,5 +2,29 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32" class="symbolic">
   <title>Ollama Alpaca: Running 0</title>
   
-  <path d="M 17,4 C 16,3.5 15,4.5 15.5,6 L 16.5,8.5 M 19.5,3 C 18.5,2.5 17.5,3.5 18,5 L 19,8 M 15.5,8.5 C 15.5,7 17,5.5 19,5.5 L 23,5.5 C 25.5,5.5 27.5,6.8 27.5,8.5 C 27.5,10 26,11 24,11 L 21.5,11 L 21.5,16 L 25.5,21 L 28,24.5 C 28.5,25.2 27.8,26 27,26 C 26.2,26 25.5,25.3 25,24.5 L 22.5,21 L 14,21 L 13,25.5 C 13,26.3 12,26.5 11,26.5 C 10.3,26.5 10,26 10,25.5 L 10.8,21 L 8.5,20.5 C 7.5,20.5 7,19.5 7,18.5 C 5.8,18.5 5,17 5.5,15.5 C 6,14.5 7.2,14.5 8,15.5 L 9,16 L 16,15 L 15.5,8.5 Z M 19.5,20 L 21,23.5 C 21.3,24.2 20.6,25 19.8,25 C 19.2,25 18.8,24.4 18.5,23.8 L 17.5,20.5 Z M 9.5,20.5 L 6,23.5 L 3.5,25.5 C 2.8,26.1 2,25.5 2,24.7 C 2,24 2.6,23.5 3.2,23 L 6.5,20 Z" style="fill: currentColor; fill-rule: evenodd; stroke: none;" />
+  <g style="fill: currentColor; stroke: none;">
+    <!-- Chubby body -->
+    <ellipse cx="14" cy="20" rx="7.5" ry="5.5" />
+    <!-- Tail -->
+    <circle cx="6" cy="18.5" r="2" />
+    <!-- Cute round head -->
+    <circle cx="21" cy="11.5" r="5.5" />
+    <!-- Chubby cute muzzle/cheeks -->
+    <ellipse cx="24" cy="13" rx="2.5" ry="2" />
+    <!-- Cute perky ears -->
+    <path d="M 18,7 C 17,7 16.5,4.5 17.5,3 C 18.5,1.8 20,2.5 19.8,4.5 L 19.5,7 Z" />
+    <path d="M 21.5,7 C 20.5,7 20,4.5 21,3 C 22,1.8 23.5,2.5 23.3,4.5 L 23,7 Z" />
+    <!-- Front stubby leg 1 forward -->
+    <path d="M 19,23 Q 23,24 25,27 Q 24,28 22.5,27 Q 20,25 18,24 Z" />
+    <!-- Front stubby leg 2 trailing -->
+    <path d="M 17,23 Q 18,25 18.5,27.5 Q 17.5,28 16.5,27.5 Q 16,25 16,23 Z" />
+    <!-- Back stubby leg 1 kicking back -->
+    <path d="M 9,23 Q 6,24 4,26.5 Q 4.5,27.5 5.8,27 Q 8,25 10,23 Z" />
+    <!-- Back stubby leg 2 pushing down -->
+    <path d="M 11,23 Q 11.5,26 12,28 Q 11,28.5 10,28 Q 9.5,26 9.5,23 Z" />
+  </g>
+  <!-- Cute eye dot cutout -->
+  <circle cx="22.5" cy="10.5" r="1.1" style="fill: #2e3436;" />
+  <circle cx="25" cy="12.5" r="0.6" style="fill: #2e3436;" />
+
 </svg>

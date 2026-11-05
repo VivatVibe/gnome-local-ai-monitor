@@ -7,7 +7,7 @@ export class AnimationController {
     this._iconActor = iconActor;
     this._basePath = basePath;
     this._runningFrames = [];
-    this._idleFrame = null;
+    this._sleepingFrame = null;
     this._offlineFrame = null;
     this._currentFrameIndex = 0;
     this._tickerId = null;
@@ -20,9 +20,14 @@ export class AnimationController {
     try {
       const dir = `${this._basePath}/resources/icons/alpaca`;
 
+      const sleepingPath = `${dir}/sleeping-symbolic.svg`;
       const idlePath = `${dir}/idle-symbolic.svg`;
-      if (Gio.File.new_for_path(idlePath).query_exists(null)) {
-        this._idleFrame = Gio.icon_new_for_string(idlePath);
+      const targetSleeping = Gio.File.new_for_path(sleepingPath).query_exists(null)
+        ? sleepingPath
+        : idlePath;
+
+      if (Gio.File.new_for_path(targetSleeping).query_exists(null)) {
+        this._sleepingFrame = Gio.icon_new_for_string(targetSleeping);
       }
 
       const offlinePath = `${dir}/offline-symbolic.svg`;
@@ -73,11 +78,12 @@ export class AnimationController {
 
     const animEnabled = settings ? settings.get_boolean('enable-running-animation') : true;
 
+    // 1. If animations are disabled in preferences
     if (!animEnabled || this._runningFrames.length === 0) {
       this._stopTicker();
       if (ollamaState && ollamaState.status === ServerStatus.ONLINE) {
-        if (this._idleFrame) {
-          this._iconActor.gicon = this._idleFrame;
+        if (this._sleepingFrame) {
+          this._iconActor.gicon = this._sleepingFrame;
         } else {
           this._iconActor.icon_name = 'system-run-symbolic';
         }
@@ -91,31 +97,32 @@ export class AnimationController {
       return;
     }
 
-    // 1. Offline state: sleeping alpaca
+    // 2. Offline state: sleeping alpaca
     if (!ollamaState || ollamaState.status !== ServerStatus.ONLINE) {
       this._stopTicker();
       if (this._offlineFrame) {
         this._iconActor.gicon = this._offlineFrame;
+      } else if (this._sleepingFrame) {
+        this._iconActor.gicon = this._sleepingFrame;
       }
       return;
     }
 
-    // 2. Idle state: standing alpaca when no model is in VRAM and 0% compute load
-    const hasLoadedModel = ollamaState.loadedModels && ollamaState.loadedModels.length > 0;
+    // 3. 0% Load / Idle state: Alpaca sleeps peacefully
     const gpuLoad = (gpuState && gpuState.hasGpu) ? (gpuState.utilizationPercent || 0) : 0;
 
-    if (!hasLoadedModel && gpuLoad === 0) {
+    if (gpuLoad === 0) {
       this._stopTicker();
-      if (this._idleFrame) {
-        this._iconActor.gicon = this._idleFrame;
+      if (this._sleepingFrame) {
+        this._iconActor.gicon = this._sleepingFrame;
       }
       return;
     }
 
-    // 3. Running state: dynamic speed adapted to load
-    const clampedLoad = Math.min(100, Math.max(0, gpuLoad));
-    // Interval scales from 210 ms (calm jog) down to 65 ms (full sprint)
-    const intervalMs = Math.max(65, Math.round(210 - (clampedLoad * 1.45)));
+    // 4. Active load state (load > 0%): Alpaca wakes up and runs
+    const clampedLoad = Math.min(100, Math.max(1, gpuLoad));
+    // Dynamic interval: from 220 ms (gentle trot at 1% load) down to 60 ms (sprint at 100% load)
+    const intervalMs = Math.max(60, Math.round(220 - (clampedLoad * 1.6)));
 
     this._startTicker(intervalMs);
   }
@@ -124,7 +131,7 @@ export class AnimationController {
     this._stopTicker();
     this._iconActor = null;
     this._runningFrames = [];
-    this._idleFrame = null;
+    this._sleepingFrame = null;
     this._offlineFrame = null;
   }
 }

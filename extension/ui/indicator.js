@@ -2,7 +2,7 @@ import GObject from 'gi://GObject';
 import St from 'gi://St';
 import Clutter from 'gi://Clutter';
 import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
-import { ServerStatus, formatBytes } from '../lib/types.js';
+import { ServerStatus } from '../lib/types.js';
 import { AnimationController } from './animation.js';
 
 export const LocalAiIndicator = GObject.registerClass(
@@ -22,7 +22,7 @@ export const LocalAiIndicator = GObject.registerClass(
       this._box.add_child(this._icon);
 
       this._label = new St.Label({
-        text: 'AI',
+        text: '0%',
         style_class: 'local-ai-badge',
         y_align: Clutter.ActorAlign.CENTER,
       });
@@ -34,34 +34,23 @@ export const LocalAiIndicator = GObject.registerClass(
     }
 
     updateDisplay(ollamaState, gpuState, settings) {
-      const showModel = settings ? settings.get_boolean('show-model-name') : true;
-      const showVram = settings ? settings.get_boolean('show-gpu-vram') : true;
-
       if (this._animController) {
         this._animController.update(ollamaState, gpuState, settings);
       }
 
-      if (ollamaState.status === ServerStatus.ONLINE) {
+      if (ollamaState && ollamaState.status === ServerStatus.ONLINE) {
         this._icon.style_class = 'system-status-icon local-ai-status-online';
       } else {
         this._icon.style_class = 'system-status-icon local-ai-status-offline';
       }
 
-      let labelParts = [];
-      if (showModel && ollamaState.loadedModels && ollamaState.loadedModels.length > 0) {
-        const activeModelName = ollamaState.loadedModels[0].name.split(':')[0];
-        labelParts.push(activeModelName);
+      if (!ollamaState || ollamaState.status !== ServerStatus.ONLINE) {
+        this._label.set_text('Off');
+        return;
       }
 
-      if (showVram && gpuState && gpuState.hasGpu) {
-        labelParts.push(`${gpuState.memoryUsedPercent}%`);
-      }
-
-      if (labelParts.length === 0) {
-        labelParts.push(ollamaState.status === ServerStatus.ONLINE ? 'Ready' : 'Off');
-      }
-
-      this._label.set_text(labelParts.join(' | '));
+      const load = (gpuState && gpuState.hasGpu) ? (gpuState.utilizationPercent || 0) : 0;
+      this._label.set_text(`${load}%`);
     }
 
     destroy() {
